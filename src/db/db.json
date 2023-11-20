@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "nickName": "testUser",
+      "createdAt": "2023-11-17T12:31:58.415Z",
+      "id": "feb042250f75284d5c91f42190afc289"
+    }
+  ],
+  "messages": [
+    {
+      "userId": "feb042250f75284d5c91f42190afc289",
+      "channelId": "5dbb3ca088c9823994e1b078ba4f5ac2",
+      "message": "Test message",
+      "createdAt": "2023-11-19T22:54:25.907Z",
+      "id": "42476e1c646bb9a54007988ca8e8a2fe"
+    }
+  ],
+  "channels": [
+    {
+      "userId": "feb042250f75284d5c91f42190afc289",
+      "channelName": "Test channel",
+      "createdAt": "2023-11-17T12:02:59.029Z",
+      "id": "5dbb3ca088c9823994e1b078ba4f5ac2"
+    }
+  ]
+}

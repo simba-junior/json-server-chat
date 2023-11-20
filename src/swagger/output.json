@@ -1,0 +1,237 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fake REST API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Get all users",
+        "tags": ["users"],
+        "parameters": [{
+          "in" : "body",
+          "name" : "query",
+          "description" : "Get user by nickname",
+          "schema" : {
+            "type": "string",
+            "example": "?nickName=Joe"
+          }
+        }],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{"$ref":"#/definitions/Users"}
+          }
+        }
+      },
+      "post": {
+        "description": "Create new user",
+        "tags": ["users"],
+        "parameters": [{
+          "in" : "body",
+          "name" : "body",
+          "description" : "body for create user",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CreateUser"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema":{"$ref":"#/definitions/User"}
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Get user",
+        "tags": ["users"],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{"$ref":"#/definitions/User"}
+          }
+        }
+      }
+    },
+    "/users/{id}/channels": {
+      "get": {
+        "description": "Get user channels",
+        "tags": ["users"],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{
+              "type": "array",
+              "items": {
+                "$ref":"#/definitions/Channel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/channels": {
+      "get": {
+        "description": "Get channels",
+        "tags": ["channels"],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{
+              "type": "array",
+              "items": {
+                "$ref":"#/definitions/Channel"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create channels",
+        "tags": ["channels"],
+        "parameters": [{
+          "in" : "body",
+          "name" : "body",
+          "description" : "body for create user",
+          "required" : true,
+          "schema" : {
+            "$ref":"#/definitions/Channel"
+          }
+        }],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema": {
+              "$ref":"#/definitions/Channel"
+            }
+          }
+        }
+      }
+    },
+    "/channels/{id}": {
+      "get": {
+        "description": "Get channel",
+        "tags": ["channels"],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{
+              "$ref":"#/definitions/Channel"
+            }
+          }
+        }
+      }
+    },
+    "/channels/{channelId}/messages": {
+      "get": {
+        "description": "Get messages in a channel",
+        "tags": ["channels"],
+        "parameters": [{
+          "in" : "body",
+          "name" : "query",
+          "description" : "Get messages in a channel by one user",
+          "schema" : {
+            "type": "string",
+            "example": "?userId=1"
+          }
+        }],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{
+              "type": "array",
+              "items": {
+                "$ref":"#/definitions/Message"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/message": {
+      "get": {
+        "description": "Get all messages",
+        "tags": ["messages"],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema":{
+              "type": "array",
+              "items": {
+                "$ref":"#/definitions/Message"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create messages",
+        "tags": ["messages"],
+        "parameters": [{
+          "in" : "body",
+          "name" : "body",
+          "description" : "body for create user",
+          "required" : true,
+          "schema" : {
+            "$ref":"#/definitions/Message"
+          }
+        }],
+        "responses": {
+          "200":{
+            "description":"successful operation",
+            "schema": {
+              "$ref":"#/definitions/Message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateUser": {
+      "type": "object",
+      "properties": {
+        "nickName": { "type": "string", "example":"Joe" }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nickName": { "type": "string", "example":"Joe" }
+      }
+    },
+    "Users":{
+      "type":"array",
+      "items": {
+        "minItems": 1,
+        "$ref":"#/definitions/User"
+      }
+    },
+    "Channel": {
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string"},
+        "channelName": { "type": "string"}
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string"},
+        "channelId": { "type": "string"},
+        "message": { "type": "string"}
+      }
+    }
+  }
+}
